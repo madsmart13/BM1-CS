@@ -289,5 +289,111 @@
   addEventListener('keydown',(e)=>{ seq.push(e.key.toLowerCase()); if(seq.join('').includes('iddqd')){ document.body.style.filter='hue-rotate(120deg)'; writeLine('SUPER MODE فعال شد'); seq.length=0; } if(seq.length>20) seq.shift(); });
 
   </script>
+  <!-- START: safe-notepad-sim -->
+<style>
+/* سبک ساده برای مودال نوت‌پدِ نمایشی */
+#pn_modal_overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:9999; }
+#pn_notepad { width:720px; max-width:95%; height:420px; background:#fff; color:#000; border-radius:6px; box-shadow:0 12px 40px rgba(0,0,0,0.6); font-family: 'Segoe UI', Tahoma, sans-serif; display:flex; flex-direction:column; overflow:hidden; }
+#pn_header { background:linear-gradient(180deg,#e9eef2,#dfe7eb); padding:8px 12px; display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(0,0,0,0.06); }
+#pn_title { font-weight:600; font-size:14px; color:#111; }
+#pn_close { margin-left:auto; background:transparent;border:0;font-size:18px;cursor:pointer; }
+#pn_body { padding:12px; flex:1; display:flex; flex-direction:column; }
+#pn_textarea { flex:1; width:100%; resize:none; border:1px solid #ccc; padding:10px; border-radius:4px; font-family: 'Consolas', monospace; font-size:14px; line-height:1.45; }
+#pn_actions { display:flex; gap:8px; padding:10px; justify-content:flex-end; border-top:1px solid rgba(0,0,0,0.04); background:#fbfcfd; }
+.pn_btn { padding:8px 12px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); background:transparent; cursor:pointer; }
+</style>
+
+<!-- دکمهٔ محرک (قرار بده نزدیک دیگر دکمه‌هایت) -->
+<button class="btn" id="pn_open_btn" style="margin-left:8px;">باز کردن نوت‌پد (نمایشی)</button>
+
+<!-- مودال نمایشی نوت‌پد -->
+<div id="pn_modal_overlay" aria-hidden="true">
+  <div id="pn_notepad" role="dialog" aria-modal="true" aria-label="Notepad - شبیه‌ساز">
+    <div id="pn_header">
+      <div id="pn_title">Notepad — شبیه‌ساز</div>
+      <button id="pn_close" title="بستن">✕</button>
+    </div>
+    <div id="pn_body">
+      <textarea id="pn_textarea" spellcheck="false">
+کد ورود و احراز شما در دسترس دیگران قرار ندهید F#hj232132h4iu
+      </textarea>
+    </div>
+    <div id="pn_actions">
+      <button class="pn_btn" id="pn_download">دانلود به‌عنوان .txt</button>
+      <button class="pn_btn" id="pn_copy">کپی به کلیپ‌بورد</button>
+      <button class="pn_btn" id="pn_close2">بستن</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* JS مستقل و با نام‌های مشخص تا تداخل ایجاد نشود */
+(() => {
+  const openBtn = document.getElementById('pn_open_btn');
+  const overlay = document.getElementById('pn_modal_overlay');
+  const closeBtns = [document.getElementById('pn_close'), document.getElementById('pn_close2')];
+  const textarea = document.getElementById('pn_textarea');
+  const downloadBtn = document.getElementById('pn_download');
+  const copyBtn = document.getElementById('pn_copy');
+
+  // متن آماده (در صورت نیاز قابل تغییر)
+  const defaultText = 'کد ورود و احراز شما در دسترس دیگران قرار ندهید F#hj232132h4iu';
+  // فقط اگر textarea خالی باشد متن پیش‌فرض را قرار بده
+  if (!textarea.value || textarea.value.trim().length === 0) textarea.value = defaultText;
+
+  function showModal(){
+    overlay.style.display = 'flex';
+    overlay.setAttribute('aria-hidden','false');
+    // فوکوس در textarea برای احساسی واقعی
+    setTimeout(()=> textarea.focus(), 80);
+  }
+  function hideModal(){
+    overlay.style.display = 'none';
+    overlay.setAttribute('aria-hidden','true');
+  }
+
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    showModal();
+  });
+
+  closeBtns.forEach(b => b.addEventListener('click', hideModal));
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) hideModal();
+  });
+
+  // دانلود فایل .txt با متن فعلی
+  downloadBtn.addEventListener('click', () => {
+    const text = textarea.value.replace(/\r\n/g, '\n');
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    // نام فایل دلخواه:
+    a.download = 'note.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  // کپی به کلیپ‌بورد (در صورت پشتیبانی)
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(textarea.value);
+      // پیغام داخل کنسول و ترمینال نمایشی (اگر وجود دارد)
+      console.log('Copied to clipboard');
+      // اگر ترمینال نمایشی صفحه وجود داشته باشد، نوشته می‌کنیم (غیرحتمی و بدون خطا اگر وجود نداشت)
+      try { if (typeof writeLine === 'function') writeLine('متن در کلیپ‌بورد کپی شد.'); } catch(e){}
+    } catch (err) {
+      alert('کپی از کلیپ‌بورد پشتیبانی نمی‌شود.');
+    }
+  });
+
+  // جلوگیری از تداخل: این ماژول هیچ متغیر/تابع گلوبالی ثبت نمی‌کند به جز عنصرهای DOM که استفاده‌شان اختیاری است.
+})();
+</script>
+<!-- END: safe-notepad-sim -->
+
 </body>
 </html>
