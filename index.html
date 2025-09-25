@@ -289,18 +289,55 @@
   addEventListener('keydown',(e)=>{ seq.push(e.key.toLowerCase()); if(seq.join('').includes('iddqd')){ document.body.style.filter='hue-rotate(120deg)'; writeLine('SUPER MODE فعال شد'); seq.length=0; } if(seq.length>20) seq.shift(); });
 
   </script>
-  <!-- START: safe-notepad-sim -->
+<!-- START: safe-notepad-sim -->
 <style>
 /* سبک ساده برای مودال نوت‌پدِ نمایشی */
-#pn_modal_overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:9999; }
-#pn_notepad { width:720px; max-width:95%; height:420px; background:#fff; color:#000; border-radius:6px; box-shadow:0 12px 40px rgba(0,0,0,0.6); font-family: 'Segoe UI', Tahoma, sans-serif; display:flex; flex-direction:column; overflow:hidden; }
-#pn_header { background:linear-gradient(180deg,#e9eef2,#dfe7eb); padding:8px 12px; display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(0,0,0,0.06); }
-#pn_title { font-weight:600; font-size:14px; color:#111; }
-#pn_close { margin-left:auto; background:transparent;border:0;font-size:18px;cursor:pointer; }
-#pn_body { padding:12px; flex:1; display:flex; flex-direction:column; }
-#pn_textarea { flex:1; width:100%; resize:none; border:1px solid #ccc; padding:10px; border-radius:4px; font-family: 'Consolas', monospace; font-size:14px; line-height:1.45; }
-#pn_actions { display:flex; gap:8px; padding:10px; justify-content:flex-end; border-top:1px solid rgba(0,0,0,0.04); background:#fbfcfd; }
-.pn_btn { padding:8px 12px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); background:transparent; cursor:pointer; }
+#pn_modal_overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+#pn_notepad {
+  width: 720px;
+  max-width: 95%;
+  height: 420px;
+  background: #fff;
+  color: #000;
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#pn_header {
+  background: linear-gradient(180deg,#e9eef2,#dfe7eb);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+#pn_title { font-weight: 600; font-size: 14px; color:#111; }
+#pn_close { margin-left: auto; background: transparent; border: 0; font-size: 18px; cursor: pointer; }
+#pn_body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+#pn_textarea {
+  flex: 1; width: 100%; resize: none;
+  border: 1px solid #ccc; padding: 10px; border-radius: 4px;
+  font-family: 'Consolas', monospace; font-size: 14px; line-height: 1.45;
+}
+#pn_actions {
+  display: flex; gap: 8px; padding: 10px; justify-content: flex-end;
+  border-top: 1px solid rgba(0,0,0,0.04); background: #fbfcfd;
+}
+.pn_btn {
+  padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08);
+  background: transparent; cursor: pointer;
+}
 </style>
 
 <!-- دکمهٔ محرک (قرار بده نزدیک دیگر دکمه‌هایت) -->
@@ -313,11 +350,13 @@
       <div id="pn_title">Notepad — شبیه‌ساز</div>
       <button id="pn_close" title="بستن">✕</button>
     </div>
+
     <div id="pn_body">
       <textarea id="pn_textarea" spellcheck="false">
 کد ورود و احراز شما در دسترس دیگران قرار ندهید F#hj232132h4iu
       </textarea>
     </div>
+
     <div id="pn_actions">
       <button class="pn_btn" id="pn_download">دانلود به‌عنوان .txt</button>
       <button class="pn_btn" id="pn_copy">کپی به کلیپ‌بورد</button>
@@ -357,7 +396,7 @@
     showModal();
   });
 
-  closeBtns.forEach(b => b.addEventListener('click', hideModal));
+  closeBtns.forEach(b => b && b.addEventListener('click', hideModal));
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) hideModal();
   });
@@ -369,8 +408,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    // نام فایل دلخواه:
-    a.download = 'note.txt';
+    a.download = 'note.txt'; // اسم فایل قابل تغییر است
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -381,19 +419,22 @@
   copyBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(textarea.value);
-      // پیغام داخل کنسول و ترمینال نمایشی (اگر وجود دارد)
+      // پیغام در کنسول و اگر تابع writeLine وجود دارد در ترمینال نمایشی نمایش می‌دهیم
       console.log('Copied to clipboard');
-      // اگر ترمینال نمایشی صفحه وجود داشته باشد، نوشته می‌کنیم (غیرحتمی و بدون خطا اگر وجود نداشت)
       try { if (typeof writeLine === 'function') writeLine('متن در کلیپ‌بورد کپی شد.'); } catch(e){}
     } catch (err) {
       alert('کپی از کلیپ‌بورد پشتیبانی نمی‌شود.');
     }
   });
 
-  // جلوگیری از تداخل: این ماژول هیچ متغیر/تابع گلوبالی ثبت نمی‌کند به جز عنصرهای DOM که استفاده‌شان اختیاری است.
+  // جلوگیری از تداخل: این ماژول هیچ متغیر/تابع گلوبالی ثبت نمی‌کند به جز عناصر DOM که استفاده‌شان اختیاری است.
 })();
 </script>
 <!-- END: safe-notepad-sim -->
 
+
+</script>
+
 </body>
+  
 </html>
