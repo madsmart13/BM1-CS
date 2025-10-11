@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>هکر لب</title>
+  <title>HK</title>
   <style>
     /* Hacker theme: green on black, monospace */
     :root{--bg:#020302;--green:#33ff66;--muted:#0f3620;--accent-blue:#7dd3fc}
@@ -47,69 +47,69 @@
   <canvas id="matrix"></canvas>
   <div class="wrap">
     <header>
-      <div class="logo">H A C K E R • L A B</div>
+      <div class="logo">H K</div>
       <nav class="nav">
-        <button class="btn" id="btn-scan">اسکن اطلاعاتی</button>
-        <button class="btn" id="btn-ping">پینگ</button>
-        <button class="btn" id="btn-fake">ورود امنیتی</button>
-        <button class="btn" id="btn-clear">پاک کن</button>
+        <button class="btn" id="btn-scan">scan </button>
+        <button class="btn" id="btn-ping">ping</button>
+        <button class="btn" id="btn-fake">Cyber entry</button>
+        <button class="btn" id="btn-clear">clear</button>
       </nav>
     </header>
 
     <div class="grid">
       <section>
         <div class="card">
-          <h2>ترمینال تعاملی</h2>
+          <h2>safe Terminal</h2>
           <div class="term" id="terminal" aria-live="polite"></div>
           <div class="input">
-            <input id="cmd" placeholder="دستورات: help | ip | scan | ping [host] | دیتا | هاست-اتکر" />
-            <button class="btn" id="run">اجرا</button>
+            <input id="cmd" placeholder="command: help | ip | scan | ping [host] | data | Host" />
+            <button class="btn" id="run">run</button>
           </div>
-          <div class="small">این ترمینال نمایشی است — هیچ عملیات مخربی انجام نمی‌دهد.</div>
+          <div class="small">safe Terminal.</div>
         </div>
 
         <div style="height:12px"></div>
 
         <div class="card">
-          <h2>ابزارها</h2>
+          <h2>tools</h2>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn" id="btn-theme">تغییر تم</button>
-            <button class="btn" id="btn-copy-ip">کپی ای‌پی</button>
-            <button class="btn" id="btn-download-log">دانلود لاگ</button>
+            <button class="btn" id="btn-theme">theme</button>
+            <button class="btn" id="btn-copy-ip">copy </button>
+            <button class="btn" id="btn-download-log">log </button>
           </div>
-          <div class="small" style="margin-top:8px">ابزارها: نمونه‌های نمایشی برای صفحه GitHub شما.</div>
+          <div class="small" style="margin-top:8px">safe Terminal.</div>
         </div>
       </section>
 
       <aside>
         <div class="card">
-          <h2>بخش IP</h2>
-          <div class="ip" id="visitor-ip">در حال دریافت ای‌پی...</div>
-          <div class="small" id="ip-info">ای‌پی و اطلاعات ساده مربوطه</div>
+          <h2>side IP</h2>
+          <div class="ip" id="visitor-ip">ip...</div>
+          <div class="small" id="ip-info">Information</div>
           <div style="height:12px"></div>
-          <div class="small">تذکر: برای نمایش دقیق‌تر، اگر سایت را روی HTTPS قرار دهید بهتر کار می‌کند.</div>
+          <div class="small"> protocol HTTPS .</div>
         </div>
 
         <div style="height:12px"></div>
 
         <div class="card">
-          <h2>اسکن اطلاعاتی</h2>
-          <div class="small">نمایش یک اسکن نمایشی (بدون نفوذ)</div>
+          <h2>scan </h2>
+          <div class="small">scan (safe)</div>
           <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="btn" id="btn-run-scan">اجرای اسکن اطلاعاتی</button>
+            <button class="btn" id="btn-run-scan">runاجرای اسکن اطلاعاتی</button>
           </div>
           <div style="height:12px"></div>
           <div class="small">بخش URL هدف</div>
           <div style="display:flex;gap:8px;margin-top:8px">
             <input id="target-url" placeholder="https://example.com" style="flex:1;background:transparent;border:1px solid rgba(51,255,102,0.06);padding:8px;border-radius:6px;color:var(--green)" />
-            <button class="btn" id="btn-load-site">بارگذاری سایت</button>
+            <button class="btn" id="btn-load-site">بارگذاری سایت- paste site </button>
           </div>
-          <div class="muted-box" id="site-info" style="margin-top:10px">اطلاعات سایت: هنوز بارگذاری نشده</div>
+          <div class="muted-box" id="site-info" style="margin-top:10px">اطلاعات سایت: هنوز بارگذاری ! paste site !! نشده</div>
         </div>
       </aside>
     </div>
 
-    <footer>برای قرار دادن در GitHub Pages: فایل را داخل ریپو قرار دهید و به Settings → Pages مراجعه کنید.</footer>
+    <footer>This site is secure🔶</footer>
   </div>
 
   <script>
@@ -142,7 +142,7 @@
   const log = [];
   function writeLine(text){ const el = document.createElement('div'); el.className='line'; el.textContent = text; term.appendChild(el); term.scrollTop = term.scrollHeight; log.push(text); }
 
-  function help(){ writeLine('دستورات قابل قبول: help | ip | scan | ping [host] | دیتا | هاست-اتکر'); }
+  function help(){ writeLine('command: help | ip | scan | ping [host] | data | find host'); }
 
   function randomCode(){ return Math.random().toString(36).substring(2,10).toUpperCase(); }
 
@@ -155,18 +155,18 @@
       writeLine('ورود امنیتی نمایشی اجرا شد — هیچ تغییری صورت نگرفت.');
     }
     else if(c==='دیتا'){
-      writeLine('دیتا تولید شد:');
+      writeLine('data make:');
       for(let i=0;i<4;i++) writeLine('CODE-'+randomCode());
     }
     else if(c==='هاست-اتکر' || c==='هاست' || c==='هاستاتکر'){
       if(!window._targetSite){ writeLine('لطفا لینک سایت رو در بخش وارد کنید (سمت راست, URL هدف)'); return; }
-      writeLine('هاست ریمور درحال بررسی است...');
-      const btn = document.createElement('button'); btn.textContent='اتصال به مخزن'; btn.className='btn'; btn.style.marginTop='8px';
+      writeLine('هاست ریمور درحال بررسی است/ Host Remover is under review....');
+      const btn = document.createElement('button'); btn.textContent='اتصال به مخزن/connecting server'; btn.className='btn'; btn.style.marginTop='8px';
       btn.onclick = async ()=>{
-        const code = prompt('کد هاست را وارد کنید:');
-        if(code===null) { writeLine('اتصال لغو شد.'); return; }
+        const code = prompt('کد هاست را وارد کنید/code hist:');
+        if(code===null) { writeLine('اتصال لغو شد./disconnect'); return; }
         if(code==='1234'){
-          writeLine('کد صحیح — اتصال برقرار شد. در حال دریافت اطلاعات...');
+          writeLine('کد صحیحtrue code— اتصال برقرار شد. در حال دریافت اطلاعات...');
           await fakeDelay();
           writeLine('--- اطلاعات جمع‌آوری شده ---');
           writeLine('IP: '+(window._detectedIP||'نامشخص'));
@@ -232,7 +232,7 @@
       const ipEl = document.getElementById('visitor-ip');
       window._detectedIP = data.ip;
       ipEl.textContent = data.ip;
-      document.getElementById('ip-info').textContent = 'خوش آمدی — ای‌پی شما شناسایی شد.';
+      document.getElementById('ip-info').textContent = 'خوش آمدی — ای‌پی شما شناسایی شد/ip Detect .';
       writeLine('ای‌پی بازدیدکننده: '+data.ip);
     }catch(e){ document.getElementById('visitor-ip').textContent='نشده'; document.getElementById('ip-info').textContent='برای دریافت ای‌پی نیاز به اینترنت و HTTPS است.'; writeLine('خطا در دریافت ای‌پی: '+e.message); }
   }
@@ -241,9 +241,9 @@
   // Copy IP
   document.getElementById('btn-copy-ip').addEventListener('click', async ()=>{
     const ip = window._detectedIP || '';
-    if(!ip) { writeLine('هیچ ای‌پی‌ای در دسترس نیست.'); return; }
+    if(!ip) { writeLine('هیچ ای‌پی‌ای در دسترس نیست/no ip.'); return; }
     await navigator.clipboard.writeText(ip);
-    writeLine('ای‌پی در کلیپ بورد کپی شد: '+ip);
+    writeLine('ای‌پی در کلیپ بورد کپی شد/copy: '+ip);
   });
 
   // Download log
@@ -257,10 +257,10 @@
 
   // Fake scan action
   document.getElementById('btn-run-scan').addEventListener('click', async ()=>{
-    writeLine('شروع اسکن اطلاعاتی...');
+    writeLine('scan ...');
     const items = ['192.168.1.1','192.168.1.5','192.168.1.18','example.com'];
-    for(const i of items){ await fakeDelay(); writeLine('پاسخ از '+i+' — پورت 80 باز'); }
-    writeLine('اسکن تمام شد.');
+    for(const i of items){ await fakeDelay(); writeLine('پاسخ از '+i+' —open port80 پورت 80 باز'); }
+    writeLine('اسکن تمام شد/complete.');
   });
 
   // Load target site button
@@ -291,7 +291,7 @@
   </script>
 <!-- START: safe-notepad-sim -->
 <style>
-/* سبک ساده برای مودال نوت‌پدِ نمایشی */
+/*   */
 #pn_modal_overlay {
   position: fixed;
   inset: 0;
@@ -341,11 +341,11 @@
 </style>
 
 <!-- دکمهٔ محرک (قرار بده نزدیک دیگر دکمه‌هایت) -->
-<button class="btn" id="pn_open_btn" style="margin-left:8px;">باز کردن نوت‌پد (نمایشی)</button>
+<button class="btn" id="pn_open_btn" style="margin-left:8px;">باز کردن نوت‌پد (code join)</button>
 
 <!-- مودال نمایشی نوت‌پد -->
 <div id="pn_modal_overlay" aria-hidden="true">
-  <div id="pn_notepad" role="dialog" aria-modal="true" aria-label="Notepad - شبیه‌ساز">
+  <div id="pn_notepad" role="dialog" aria-modal="true" aria-label="Notepad - code ">
     <div id="pn_header">
       <div id="pn_title">Notepad — شبیه‌ساز</div>
       <button id="pn_close" title="بستن">✕</button>
@@ -353,7 +353,7 @@
 
     <div id="pn_body">
       <textarea id="pn_textarea" spellcheck="false">
-کد ورود و احراز شما در دسترس دیگران قرار ندهید F#hj232132h4iu
+کد ورود و احراز شما در دسترس دیگران قرار ندهید-be safe F#hj232132h4iu
       </textarea>
     </div>
 
